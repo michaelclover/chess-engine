@@ -1,6 +1,15 @@
-$squareEvenColour: #fff;
-$squareOddColour: #000;
+$squareEvenColour: rgba(241, 199, 144, 0.822);
+$squareOddColour: rgba(97, 52, 0, 0.801);
 
 .square {
-    background-color: $squareEvenColour;
+    // define the width and height properties.
+    width: 12.5%;
+    height: 12.5vh;
+
+    // remove the styling from the square.
+    border: 1px solid black;
+    padding: 0;
+    cursor: pointer;
 }
+
+
