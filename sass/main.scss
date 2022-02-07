@@ -1,10 +1,12 @@
+// define square properties.
 $squareEvenColour: rgba(241, 199, 144, 0.822);
 $squareOddColour: rgba(97, 52, 0, 0.801);
+$squareMinSize: 75px;
 
 .square {
     // define the width and height properties.
-    width: 12.5%;
-    height: 12.5vh;
+    min-height: $squareMinSize;
+    min-width: $squareMinSize;
 
     // remove the styling from the square.
     border: 1px solid black;
@@ -30,4 +32,16 @@ $squareOddColour: rgba(97, 52, 0, 0.801);
     }
 }
 
+body {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
 
+.board {
+    min-width: $squareMinSize * 8;
+    max-height: $squareMinSize * 8;
+    border: 1px solid black;
+}
