@@ -14,6 +14,11 @@ $squareMinSize: 75px;
     cursor: pointer;
 }
 
+.white-pawn {
+    background: url('/images/pawn.png') no-repeat center center;
+    background-size: cover;
+}
+
 .odd-row {
     .square:nth-of-type(even) {
         background-color: $squareEvenColour;

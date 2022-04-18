@@ -1,5 +1,6 @@
 import React from 'react';
 import Square from './Square';
+import * as Helpers from '../helpers/Helpers';
 
 const NUM_OF_SQUARES = 64;
 
@@ -10,11 +11,15 @@ class Board extends React.Component {
         this.state = {
             squares: [],
         }
- 
-        for(let i = 0; i < NUM_OF_SQUARES; ++i) {
-            this.state.squares.push(<Square number={i}/>);
-        }  
 
+        this.setupBoard();
+    }
+
+    setupBoard() {
+        for(let i = 0; i < NUM_OF_SQUARES; ++i) {
+            let piece = Helpers.setupBoardClassic(i);
+            this.state.squares.push(<Square number={i} pieceName={piece}/>);
+        }
     }
 
     render() {
