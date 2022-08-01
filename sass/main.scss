@@ -15,7 +15,62 @@ $squareMinSize: 75px;
 }
 
 .white-pawn {
-    background: url('/images/pawn.png') no-repeat center center;
+    background: url('/images/Chess_plt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.black-pawn {
+    background: url('/images/Chess_pdt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.white-queen {
+    background: url('/images/Chess_qlt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.black-queen {
+    background: url('/images/Chess_qdt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.white-king {
+    background: url('/images/Chess_klt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.black-king {
+    background: url('/images/Chess_kdt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.white-rook {
+    background: url('/images/Chess_rlt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.black-rook {
+    background: url('/images/Chess_rdt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.white-bishop {
+    background: url('/images/Chess_blt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.black-bishop {
+    background: url('/images/Chess_bdt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.white-knight {
+    background: url('/images/Chess_nlt60.png') no-repeat center center;
+    background-size: cover;
+}
+
+.black-knight {
+    background: url('/images/Chess_ndt60.png') no-repeat center center;
     background-size: cover;
 }
 
