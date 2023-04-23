@@ -2,6 +2,7 @@ import React from 'react';
 import Square from './Square';
 import * as Helpers from '../helpers/Helpers';
 import * as Logic from '../logic/Logic';
+import * as Pieces from '../classes/Pieces';
 
 const NUM_OF_SQUARES = 64;
 
@@ -11,8 +12,10 @@ class Board extends React.Component {
         super(props);
         this.state = {
             squares: [],
+            pieces: [],
             boardFlipped: false, // white starts at the bottom.
-            from: -1, // drag from this tile.
+            from: -1, // store the current tile drag index.
+            whiteMove: true, // white or black to move.
         }
 
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -25,10 +28,12 @@ class Board extends React.Component {
         for(let i = 0; i < NUM_OF_SQUARES; ++i) {
             let piece = Helpers.setupBoardClassic(i);
             this.state.squares.push(<Square number={i}
-                                            pieceName={piece}
+                                            piece={piece}
                                             notation={Helpers.indexToTileNotation[i]}
                                             onMouseDown={this.onMouseDown}
                                             onMouseUp={this.onMouseUp}/>);
+            this.state.pieces.push(piece); // I'm not sure how to access 'piece' in the above array,
+            // so I've copied reference to the element here, in pieces.
         }
     }
 
@@ -46,29 +51,32 @@ class Board extends React.Component {
         }
 
         let squares = this.state.squares;
-        let p1 = squares[from];
-        let p2 = squares[to];
+        let pieces = this.state.pieces;
 
-        if(Logic.processMove(p1, p2)) {
+        if(Logic.processMove(this.state.pieces[from], this.state.pieces[to], this.state.whiteMove)) {
+            pieces[to] = pieces[from];
+            pieces[from] = new Pieces.Empty("", "empty-square");
+
             squares[from] = <Square number={from}
-                                               pieceName={"empty-square"}
-                                               notation={Helpers.indexToTileNotation[from]}
-                                               isFirstMove={false}
-                                               onMouseDown={this.onMouseDown}
-                                               onMouseUp={this.onMouseUp}/>;
+                                    piece={pieces[from]}
+                                    notation={Helpers.indexToTileNotation[from]}
+                                    isFirstMove={false}
+                                    onMouseDown={this.onMouseDown}
+                                    onMouseUp={this.onMouseUp}/>;
 
             squares[to] = <Square number={to}
-                                  pieceName={p1.props.pieceName}
+                                  piece={pieces[to]}
                                   notation={Helpers.indexToTileNotation[to]}
                                   isFirstMove={false}
                                   onMouseDown={this.onMouseDown}
                                   onMouseUp={this.onMouseUp}/>;
-                                  
+
+            this.state.whiteMove = !this.state.whiteMove;
+
             this.setState(prevState => ({
                 squares: squares
             }));
         }
-
     }
 
     render() {

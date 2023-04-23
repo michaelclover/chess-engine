@@ -1,4 +1,4 @@
-class Piece {
+export class Piece {
 
     constructor(colour, name) {
         this.colour = colour;
@@ -7,7 +7,7 @@ class Piece {
 
 }
 
-class Pawn extends Piece {
+export class Pawn extends Piece {
 
     constructor(colour, name) {
         super(colour, name);
@@ -15,7 +15,7 @@ class Pawn extends Piece {
 
 }
 
-class Bishop extends Piece {
+export class Bishop extends Piece {
 
     constructor(colour, name) {
         super(colour, name);
@@ -23,7 +23,7 @@ class Bishop extends Piece {
 
 }
 
-class Knight extends Piece {
+export class Knight extends Piece {
 
     constructor(colour, name) {
         super(colour, name);
@@ -31,7 +31,7 @@ class Knight extends Piece {
 
 }
 
-class Rook extends Piece {
+export class Rook extends Piece {
 
     constructor(colour, name) {
         super(colour, name);
@@ -39,7 +39,7 @@ class Rook extends Piece {
 
 }
 
-class King extends Piece {
+export class King extends Piece {
 
     constructor(colour, name) {
         super(colour, name);
@@ -47,10 +47,17 @@ class King extends Piece {
 
 }
 
-class Queen extends Piece {
+export class Queen extends Piece {
 
     constructor(colour, name) {
         super(colour, name);
     }
 
+}
+
+export class Empty extends Piece {
+
+    constructor(colour, name) {
+        super(colour, name);
+    }
 }

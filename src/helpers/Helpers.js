@@ -1,104 +1,106 @@
+import * as Pieces from '../classes/Pieces'
+
 export function setupBoardClassic(i) {
     let piece = "";
     switch(i) {
         case 0:
-            piece = "white-rook";
+            piece = new Pieces.Rook("white", "white-rook");
             break;
         case 1:
-            piece = "white-knight";
+            piece = new Pieces.Knight("white", "white-knight");
             break;
         case 2:
-            piece = "white-bishop";
+            piece = new Pieces.Bishop("white", "white-bishop");
             break;
         case 3:
-            piece = "white-queen";
+            piece = new Pieces.Queen("white", "white-queen");
             break;
         case 4:
-            piece = "white-king";
+            piece = new Pieces.King("white", "white-king");
             break;
         case 5:
-            piece = "white-bishop";
+            piece = new Pieces.Bishop("white", "white-bishop");
             break;
         case 6:
-            piece = "white-knight";
+            piece = new Pieces.Knight("white", "white-knight");
             break;
         case 7:
-            piece = "white-rook";
+            piece = new Pieces.Rook("white", "white-rook");
             break;
         case 8:
-            piece = "white-pawn";
+            piece = new Pieces.Pawn("white", "white-pawn");
             break;
         case 9:
-            piece = "white-pawn";
+            piece = new Pieces.Pawn("white", "white-pawn");
             break;
         case 10:
-            piece = "white-pawn";
+            piece = new Pieces.Pawn("white", "white-pawn");
             break;
         case 11:
-            piece = "white-pawn";
+            piece = new Pieces.Pawn("white", "white-pawn");
             break;
         case 12:
-            piece = "white-pawn";
+            piece = new Pieces.Pawn("white", "white-pawn");
             break;
         case 13:
-            piece = "white-pawn";
+            piece = new Pieces.Pawn("white", "white-pawn");
             break;
         case 14:
-            piece = "white-pawn";
+            piece = new Pieces.Pawn("white", "white-pawn");
             break;
         case 15:
-            piece = "white-pawn";
+            piece = new Pieces.Pawn("white", "white-pawn");
             break;
         case 48:
-            piece = "black-pawn";
+            piece = new Pieces.Pawn("black", "black-pawn");
             break;
         case 49:
-            piece = "black-pawn";
+            piece = new Pieces.Pawn("black", "black-pawn");
             break;
         case 50:
-            piece = "black-pawn";
+            piece = new Pieces.Pawn("black", "black-pawn");
             break;
         case 51:
-            piece = "black-pawn";
+            piece = new Pieces.Pawn("black", "black-pawn");
             break;
         case 52:
-            piece = "black-pawn";
+            piece = new Pieces.Pawn("black", "black-pawn");
             break;
         case 53:
-            piece = "black-pawn";
+            piece = new Pieces.Pawn("black", "black-pawn");
             break;
         case 54:
-            piece = "black-pawn";
+            piece = new Pieces.Pawn("black", "black-pawn");
             break;
         case 55:
-            piece = "black-pawn";
+            piece = new Pieces.Pawn("black", "black-pawn");
             break;
         case 56:
-            piece = "black-rook";
+            piece = new Pieces.Rook("black", "black-rook");
             break;
         case 57:
-            piece = "black-knight";
+            piece = new Pieces.Knight("black", "black-knight");
             break;
         case 58:
-            piece = "black-bishop";
+            piece = new Pieces.Bishop("black", "black-bishop");
             break;
         case 59:
-            piece = "black-queen";
+            piece = new Pieces.Queen("black", "black-queen");
             break;
         case 60:
-            piece = "black-king";
+            piece = new Pieces.King("black", "black-king");
             break;
         case 61:
-            piece = "black-bishop";
+            piece = new Pieces.Bishop("black", "black-bishop");
             break;
         case 62:
-            piece = "black-knight";
+            piece = new Pieces.Knight("black", "black-knight");
             break;
         case 63:
-            piece = "black-rook";
+            piece = new Pieces.Rook("black", "black-rook");
             break;
         default:
-            piece = "empty-square";
+            piece = new Pieces.Empty("", "empty-square");
             break;
     }
     return piece;
