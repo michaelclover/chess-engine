@@ -44,19 +44,28 @@ class Board extends React.Component {
     }
 
     onMouseUp(to) {
+        // ignore the drag and drop if we've dragged and dropped on the same tile
+        // or if the tile number is invalid.
         let from = this.state.from;
-        if(to === this.state.from || // dropped and dragged on same tile.
-           to === -1) { // piece number is invalid.
+        if(to === this.state.from ||
+           to === -1) {
               return;
         }
 
         let squares = this.state.squares;
         let pieces = this.state.pieces;
 
-        if(Logic.processMove(this.state.pieces[from], this.state.pieces[to], this.state.whiteMove)) {
+        if(Logic.IsLegalMove(this.state.pieces[from],
+                             this.state.pieces[to],
+                             this.state.whiteMove,
+                             this.state.pieces,
+                             from,
+                             to)) {
+            // update the pieces game state.
             pieces[to] = pieces[from];
             pieces[from] = new Pieces.Empty("", "empty-square");
 
+            // store the state in our react render components.
             squares[from] = <Square number={from}
                                     piece={pieces[from]}
                                     notation={Helpers.indexToTileNotation[from]}
@@ -71,8 +80,10 @@ class Board extends React.Component {
                                   onMouseDown={this.onMouseDown}
                                   onMouseUp={this.onMouseUp}/>;
 
+            // invert the turn state after the move.
             this.state.whiteMove = !this.state.whiteMove;
 
+            // call set state so react re-renders the props.
             this.setState(prevState => ({
                 squares: squares
             }));

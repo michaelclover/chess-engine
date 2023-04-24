@@ -9,6 +9,9 @@ export class Piece {
 
 export class Pawn extends Piece {
 
+    // we need to know this to determine whether we can move two places or not.
+    hasMoved = false;
+
     constructor(colour, name) {
         super(colour, name);
     }
@@ -40,6 +43,10 @@ export class Rook extends Piece {
 }
 
 export class King extends Piece {
+
+    // we need to know this to determine whether we can castle or not.
+    hasCastled = false;
+    hasMoved = false;
 
     constructor(colour, name) {
         super(colour, name);
