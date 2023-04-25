@@ -11,10 +11,9 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            squares: [],
-            pieces: [],
-            boardFlipped: false, // white starts at the bottom.
-            from: -1, // store the current tile drag index.
+            tileInfo: [], // holds both the piece logical state and the piece render state.
+            boardFlipped: false, // which way the board is rendered. false = white at the bottom.
+            fromIndex: -1, // store the current tile drag index.
             whiteMove: true, // white or black to move.
         }
 
@@ -27,56 +26,46 @@ class Board extends React.Component {
     setupBoard() {
         for(let i = 0; i < NUM_OF_SQUARES; ++i) {
             let piece = Helpers.setupBoardClassic(i);
-            this.state.squares.push(<Square number={i}
-                                            piece={piece}
-                                            notation={Helpers.indexToTileNotation[i]}
-                                            onMouseDown={this.onMouseDown}
-                                            onMouseUp={this.onMouseUp}/>);
-            this.state.pieces.push(piece); // I'm not sure how to access 'piece' in the above array,
-            // so I've copied reference to the element here, in pieces.
+            let renderElem = <Square number={i} pieceName={piece.name} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}/>;
+            this.state.tileInfo.push({"piece": piece, "renderElem": renderElem})
         }
     }
 
     onMouseDown(from) {
         this.setState(prevState => ({
-            from: from
+            fromIndex: from
         }));
     }
 
-    onMouseUp(to) {
+    onMouseUp(toIndex) {
         // ignore the drag and drop if we've dragged and dropped on the same tile
         // or if the tile number is invalid.
-        let from = this.state.from;
-        if(to === this.state.from ||
-           to === -1) {
+        let fromIndex = this.state.fromIndex;
+        if(toIndex === fromIndex ||
+           toIndex === -1) {
               return;
         }
 
-        let squares = this.state.squares;
-        let pieces = this.state.pieces;
+        let tileInfo = this.state.tileInfo;
 
-        if(Logic.IsLegalMove(this.state.pieces[from],
-                             this.state.pieces[to],
+        if(Logic.IsLegalMove(tileInfo[fromIndex].piece,
+                             tileInfo[toIndex].piece,
                              this.state.whiteMove,
-                             this.state.pieces,
-                             from,
-                             to)) {
+                             tileInfo,
+                             fromIndex,
+                             toIndex)) {
             // update the pieces game state.
-            pieces[to] = pieces[from];
-            pieces[from] = new Pieces.Empty("", "empty-square");
+            tileInfo[toIndex].piece = tileInfo[fromIndex].piece;
+            tileInfo[fromIndex].piece = new Pieces.Empty("", "empty-square");
 
             // store the state in our react render components.
-            squares[from] = <Square number={from}
-                                    piece={pieces[from]}
-                                    notation={Helpers.indexToTileNotation[from]}
-                                    isFirstMove={false}
+            tileInfo[fromIndex].renderElem = <Square number={fromIndex}
+                                    pieceName={tileInfo[fromIndex].piece.name}
                                     onMouseDown={this.onMouseDown}
                                     onMouseUp={this.onMouseUp}/>;
 
-            squares[to] = <Square number={to}
-                                  piece={pieces[to]}
-                                  notation={Helpers.indexToTileNotation[to]}
-                                  isFirstMove={false}
+            tileInfo[toIndex].renderElem = <Square number={toIndex}
+                                  pieceName={tileInfo[toIndex].piece.name}
                                   onMouseDown={this.onMouseDown}
                                   onMouseUp={this.onMouseUp}/>;
 
@@ -85,7 +74,7 @@ class Board extends React.Component {
 
             // call set state so react re-renders the props.
             this.setState(prevState => ({
-                squares: squares
+                tileInfo: tileInfo
             }));
         }
     }
@@ -94,14 +83,14 @@ class Board extends React.Component {
         if(!this.state.boardFlipped) {
             return (
                 <div class="board">
-                    <div class="odd-row">{this.state.squares.slice(56, 64)}</div>
-                    <div class="even-row">{this.state.squares.slice(48, 56)}</div>
-                    <div class="odd-row">{this.state.squares.slice(40, 48)}</div>
-                    <div class="even-row">{this.state.squares.slice(32, 40)}</div>
-                    <div class="odd-row">{this.state.squares.slice(24, 32)}</div>
-                    <div class="even-row">{this.state.squares.slice(16, 24)}</div>
-                    <div class="odd-row">{this.state.squares.slice(8, 16)}</div>
-                    <div class="even-row">{this.state.squares.slice(0, 8)}</div>
+                    <div class="odd-row">{this.state.tileInfo.slice(56, 64).map(({renderElem}) => renderElem)}</div>
+                    <div class="even-row">{this.state.tileInfo.slice(48, 56).map(({renderElem}) => renderElem)}</div>
+                    <div class="odd-row">{this.state.tileInfo.slice(40, 48).map(({renderElem}) => renderElem)}</div>
+                    <div class="even-row">{this.state.tileInfo.slice(32, 40).map(({renderElem}) => renderElem)}</div>
+                    <div class="odd-row">{this.state.tileInfo.slice(24, 32).map(({renderElem}) => renderElem)}</div>
+                    <div class="even-row">{this.state.tileInfo.slice(16, 24).map(({renderElem}) => renderElem)}</div>
+                    <div class="odd-row">{this.state.tileInfo.slice(8, 16).map(({renderElem}) => renderElem)}</div>
+                    <div class="even-row">{this.state.tileInfo.slice(0, 8).map(({renderElem}) => renderElem)}</div>
                 </div>
             );
         }

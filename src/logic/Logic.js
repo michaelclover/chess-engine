@@ -20,7 +20,7 @@ export function IsLegalMove(p1, p2, whiteMove, boardPieces, from, to) {
         case "Pawn":
         {
             // check to see if there's anything blocking a single move forward.
-            if(boardPieces[to].constructor.name === "Empty") {
+            if(boardPieces[to].piece.constructor.name === "Empty") {
                 if(p1.colour == "white") {
                     legalMoves.push(from + 8);
                     // check whether we can move two squares forward.
@@ -32,6 +32,24 @@ export function IsLegalMove(p1, p2, whiteMove, boardPieces, from, to) {
                     legalMoves.push(from - 8);
                     if(!p1.hasMoved) {
                         legalMoves.push(from - 16);
+                    }
+                }
+            }
+            else {
+                if(p1.colour == "white") {
+                    if(to == (from + 7) && p2.colour == "black") {
+                        legalMoves.push(from + 7);
+                    }
+                    if(to == (from + 9) && p2.colour == "black") {
+                        legalMoves.push(from + 9);
+                    }
+                }
+                if(p1.colour == "black") {
+                    if(to == (from - 7) && p2.colour == "white") {
+                        legalMoves.push(from - 7);
+                    }
+                    if(to == (from - 9) && p2.colour == "white") {
+                        legalMoves.push(from - 9);
                     }
                 }
             }
@@ -56,9 +74,13 @@ export function IsLegalMove(p1, p2, whiteMove, boardPieces, from, to) {
         if(p1.constructor.name === "Pawn") {
             p1.hasMoved = true;
         }
+
+        // check to see that the board state is valid. e.g. has an illegal move
+        // been played that leaves the current player's king in check?
+
         return true;
     }
-    else {
+    else { // the move isn't legal.
         return false;
     }
 };

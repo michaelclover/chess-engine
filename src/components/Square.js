@@ -5,10 +5,8 @@ class Square extends React.Component {
         super(props);
         this.state = {
             isClickToggled: false,
-            number: props.number, // the square number - todo: write helper function to convert number to square name.
-            piece: props.piece,
-            notation: props.notation, // the square notation, e.g. A1.
-            isFirstMove: props.isFirstMove,
+            number: props.number, // the square number. Use helper function to convert to notation.
+            pieceName: props.pieceName,
         };
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseUp = this.onMouseUp.bind(this);
@@ -19,7 +17,7 @@ class Square extends React.Component {
         const content = this.state.isClickToggled ? this.state.number : "\u2060";
         return (
             <button type="submit"
-                    className={`square ${this.props.piece.name}`}
+                    className={`square ${this.props.pieceName}`}
                     onClick={this.handleClick}
                     onMouseUp={this.onMouseUp}
                     onMouseDown={this.onMouseDown}>
