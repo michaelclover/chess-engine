@@ -27,12 +27,12 @@ class Square extends React.Component {
     }
 
     onMouseUp(e) {
-        console.log("mouse up on tile: ", this.props.notation);
+        //console.log("mouse up on tile: ", this.props.notation);
         this.props.onMouseUp(this.props.number); // lift state up to the board to handle the logic.
     }
 
     onMouseDown(e) {
-        console.log("mouse down on tile: ", this.props.notation);
+        //console.log("mouse down on tile: ", this.props.notation);
         this.props.onMouseDown(this.props.number); // lift state up to the board to handle the logic.
     }
 }

@@ -179,3 +179,81 @@ export const indexToTileNotation = {
     62: "G8",
     63: "H8",
 };
+
+export function getRowColumnFromIndex(index) {
+
+    let notation = indexToTileNotation[index];
+    let col = -1;
+    switch(notation[0]) {
+        case "A": {
+            col = 0;
+            break;
+        }
+        case "B": {
+            col = 1;
+            break;
+        }
+        case "C": {
+            col = 2;
+            break;
+        }
+        case "D": {
+            col = 3;
+            break;
+        }
+        case "E": {
+            col = 4;
+            break;
+        }
+        case "F": {
+            col = 5;
+            break;
+        }
+        case "G": {
+            col = 6;
+            break;
+        }
+        case "H": {
+            col = 7;
+            break;
+        }
+    }
+
+    let row = -1;
+    switch(notation[1]) {
+        case "1": {
+            row = 0;
+            break;
+        }
+        case "2": {
+            row = 1;
+            break;
+        }
+        case "3": {
+            row = 2;
+            break;
+        }
+        case "4": {
+            row = 3;
+            break;
+        }
+        case "5": {
+            row = 4;
+            break;
+        }
+        case "6": {
+            row = 5;
+            break;
+        }
+        case "7": {
+            row = 6;
+            break;
+        }
+        case "8": {
+            row = 7;
+            break;
+        }
+    }
+
+    return [row, col]
+}
