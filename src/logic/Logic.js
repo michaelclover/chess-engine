@@ -1,4 +1,5 @@
 import * as Helpers from "../helpers/Helpers"
+import * as Pieces from "../classes/Pieces";
 
 // p1 - the piece that is being moved.
 // p2 - the piece that is being moved to.
@@ -163,7 +164,38 @@ export function IsLegalMove(p1, p2, whiteMove, boardPieces, from, to) {
             break;
         }
         case "King":
+        {
+            let validMoves = [-1, 1, 7, 8, 9, -7, -8, -9];
+            for(const validMove of validMoves) {
+                if(to == (from + validMove) && p1.colour != p2.colour) {
+                    legalMoves.push(to);
+                    break;
+                }
+            }
+
+            if(!p1.hasMoved) {
+                if(to == (from - 2) &&
+                   boardPieces[from - 1].piece.constructor.name === "Empty" &&
+                   boardPieces[from - 2].piece.constructor.name === "Empty" &&
+                   boardPieces[from - 3].piece.constructor.name === "Empty" &&
+                   boardPieces[from - 4].piece.constructor.name === "Rook" &&
+                   boardPieces[from - 4].piece.hasMoved === false) {
+                     legalMoves.push(to);
+                     // need to signal to the caller that the rook has also moved.
+                }
+
+                if(to == (from + 2) &&
+                   boardPieces[from + 1].piece.constructor.name === "Empty" &&
+                   boardPieces[from + 2].piece.constructor.name === "Empty" &&
+                   boardPieces[from + 3].piece.constructor.name === "Rook" &&
+                   boardPieces[from + 3].piece.hasMoved === false) {
+                      legalMoves.push(to);
+                      // need to signal to the caller that the rook has also moved.
+                }
+            }
+
             break;
+        }
         case "Queen":
             break;
         default:

@@ -36,6 +36,8 @@ export class Knight extends Piece {
 
 export class Rook extends Piece {
 
+    hasMoved = false;
+
     constructor(colour, name) {
         super(colour, name);
     }
